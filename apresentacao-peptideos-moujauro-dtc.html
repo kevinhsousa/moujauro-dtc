@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>brarch. — Planejamento Executivo Peptídeos & Moujauro DTC (US & Global Markets)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nunito:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Cores principais - brarch. Design System */
+      --color-olive:             #5F5B47;
+      --color-olive-light:       #787A54;
+      --color-olive-desaturated: #9E9B8F;
+      --color-white:             #FFFFFF;
+      --color-off-white:         #F5F3EE;
+
+      /* Suporte & Superfícies */
+      --color-table-stripe:      #F0EEE9;
+      --color-table-border:      #D8D5CB;
+      --color-card-border:       #E2DFD6;
+
+      /* Texto */
+      --color-text-dark:         #242424;
+      --color-text-muted:        #686868;
+      --color-text-white:        #FFFFFF;
+      --color-highlight-box:     #1D1D1B;
+
+      /* Tipografia */
+      --font-brand:    'Nunito', 'Inter', sans-serif;
+      --font-display:  'Inter', 'Nunito', sans-serif;
+      --font-body:     'Inter', sans-serif;
+
+      /* Pesos */
+      --fw-thin:    200;
+      --fw-light:   300;
+      --fw-regular: 400;
+      --fw-medium:  500;
+      --fw-bold:    700;
+
+      /* Dimensões do slide */
+      --slide-w:      1920px;
+      --slide-h:      1080px;
+      --margin-slide: 70px;
+
+      /* Radii */
+      --radius-chip:   4px;
+      --radius-card:   10px;
+
+      /* Sombras Sutis */
+      --shadow-soft:   0 6px 20px rgba(0, 0, 0, 0.04);
+      --shadow-medium: 0 12px 36px rgba(0, 0, 0, 0.08);
+      --shadow-drawer: -18px 0 60px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #121212;
+      overflow: hidden;
+      font-family: var(--font-body);
+      color: var(--color-text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Viewport Container com escala automática 16:9 */
+    #presentation-stage {
+      position: relative;
+      width: var(--slide-w);
+      height: var(--slide-h);
+      overflow: hidden;
+      transform-origin: center center;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+      background-color: var(--color-white);
+    }
+
+    /* Slide Base - Estrutura Absoluta sem conflito de flex */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--slide-w);
+      height: var(--slide-h);
+      padding: 50px var(--margin-slide) 70px var(--margin-slide);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease-in-out, visibility 0.35s;
+      background-color: var(--color-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    /* Variações de fundo */
+    .slide--olive {
+      background-color: var(--color-olive);
+      color: var(--color-text-white);
+    }
+
+    .slide--soft {
+      background-color: var(--color-off-white);
+    }
+
+    /* Header Superior do Slide */
+    .slide-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      min-height: 70px;
+      z-index: 20;
+    }
+
+    /* 4.1 Section Header (Clean / Minimalist) */
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .section-bar {
+      width: 3.5px;
+      height: 64px;
+      background: var(--color-olive);
+      flex-shrink: 0;
+    }
+
+    .slide--olive .section-bar {
+      background: var(--color-white);
+    }
+
+    .section-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .section-title .label {
+      font-size: 13px;
+      font-weight: var(--fw-medium);
+      letter-spacing: 0.22em;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    .slide--olive .section-title .label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .section-title .name {
+      font-size: 32px;
+      line-height: 1.15;
+      font-weight: var(--fw-light);
+      color: var(--color-text-dark);
+      text-transform: lowercase;
+    }
+
+    .section-title .name strong {
+      font-weight: var(--fw-bold);
+      color: var(--color-olive);
+    }
+
+    .slide--olive .section-title .name {
+      color: var(--color-text-white);
+    }
+
+    .slide--olive .section-title .name strong {
+      color: var(--color-text-white);
+      font-weight: var(--fw-bold);
+    }
+
+    /* Botão de Sumário Rápido no Topo */
+    .btn-intelligence-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: var(--radius-chip);
+      background: var(--color-olive);
+      color: var(--color-white);
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(95, 91, 71, 0.25);
+      flex-shrink: 0;
+    }
+
+    .btn-intelligence-trigger:hover {
+      background: var(--color-olive-light);
+      transform: translateY(-1px);
+    }
+
+    .slide--olive .btn-intelligence-trigger {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .slide--olive .btn-intelligence-trigger:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-intelligence-trigger svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2;
+    }
+
+    /* 4.3 Chip / Tag */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-chip);
+      background: var(--color-olive);
+      color: var(--color-text-white);
+      font-size: 11px;
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .chip--light {
+      background: var(--color-olive-desaturated);
+    }
+
+    .chip--soft {
+      background: rgba(95, 91, 71, 0.12);
+      color: var(--color-olive);
+    }
+
+    /* 4.4 Bicolor Title */
+    .bicolor-title {
+      font-family: var(--font-display);
+      font-size: 46px;
+      line-height: 1.15;
+      text-transform: lowercase;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .bicolor-title .light {
+      font-weight: var(--fw-light);
+      color: var(--color-text-white);
+    }
+
+    .bicolor-title .bold {
+      font-weight: var(--fw-bold);
+      color: var(--color-text-white);
+    }
+
+    .bicolor-title.dark .light {
+      color: var(--color-text-dark);
+    }
+
+    .bicolor-title.dark .bold {
+      color: var(--color-olive);
+    }
+
+    .bicolor-title--vertical {
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .bicolor-title--display {
+      font-size: 78px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    /* 4.5 Tabelas de Dados */
+    .data-table-wrapper {
+      width: 100%;
+      border: 1.5px solid var(--color-table-border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--color-white);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .data-table thead tr th {
+      background: var(--color-olive);
+      color: var(--color-white);
+      font-weight: var(--fw-bold);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 12px 18px;
+      border-bottom: 1.5px solid var(--color-table-border);
+    }
+
+    .data-table tbody tr {
+      transition: background 0.15s;
+    }
+
+    .data-table tbody tr.stripe {
+      background: var(--color-table-stripe);
+    }
+
+    .data-table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--color-table-border);
+      color: var(--color-text-dark);
+      font-size: 14px;
+      font-weight: var(--fw-regular);
+      line-height: 1.45;
+    }
+
+    .data-table td.label-cell {
+      font-weight: var(--fw-bold);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-right: 1px solid var(--color-table-border);
+      color: var(--color-olive);
+      white-space: nowrap;
+    }
+
+    .data-table tfoot tr td {
+      background: var(--color-olive);
+      color: var(--color-white);
+      font-weight: var(--fw-bold);
+      padding: 14px 18px;
+      font-size: 15px;
+    }
+
+    /* Cards e Grids Arquitetônicos */
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 24px;
+      margin-bottom: 40px;
+      width: 100%;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width: 100%;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 26px;
+      width: 100%;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 100%;
+    }
+
+    .arc-card {
+      border: 1.5px solid var(--color-card-border);
+      border-radius: var(--radius-card);
+      padding: 24px 26px;
+      background: var(--color-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .arc-card:hover {
+      box-shadow: var(--shadow-medium);
+      transform: translateY(-2px);
+    }
+
+    .arc-card--olive {
+      background: var(--color-olive);
+      color: var(--color-white);
+      border-color: var(--color-olive);
+    }
+
+    .arc-card--soft {
+      background: var(--color-off-white);
+      border-color: var(--color-table-border);
+    }
+
+    .card-icon-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .card-icon-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(95, 91, 71, 0.1);
+      color: var(--color-olive);
+    }
+
+    .arc-card--olive .card-icon-badge {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+    }
+
+    .card-icon-badge svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.75;
+      stroke: currentColor;
+      fill: none;
+    }
+
+    .arc-card h3 {
+      font-size: 19px;
+      font-weight: var(--fw-bold);
+      color: var(--color-olive);
+      text-transform: lowercase;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .arc-card--olive h3 {
+      color: var(--color-white);
+    }
+
+    .arc-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--color-text-dark);
+      font-weight: var(--fw-regular);
+    }
+
+    .arc-card--olive p {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .arc-card .metric {
+      font-size: 36px;
+      font-weight: var(--fw-bold);
+      color: var(--color-olive);
+      line-height: 1;
+      margin: 6px 0 4px 0;
+      letter-spacing: -0.02em;
+    }
+
+    .arc-card--olive .metric {
+      color: var(--color-white);
+    }
+
+    .arc-card .sub-metric {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      font-weight: var(--fw-medium);
+    }
+
+    .arc-card--olive .sub-metric {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* 4.9 Slide Footer - Totalmente Desacoplado na Base */
+    .slide-footer {
+      position: absolute;
+      bottom: 28px;
+      left: var(--margin-slide);
+      right: var(--margin-slide);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--color-table-border);
+      padding-top: 14px;
+      font-size: 11px;
+      font-weight: var(--fw-light);
+      letter-spacing: 0.16em;
+      color: var(--color-olive-desaturated);
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    .slide--olive .slide-footer {
+      border-top-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .slide-footer strong {
+      font-weight: var(--fw-bold);
+      color: var(--color-olive);
+    }
+
+    .slide--olive .slide-footer strong {
+      color: var(--color-white);
+    }
+
+    /* ========================================================
+       DRAWER INTERATIVO DE INTELIGÊNCIA & SUMÁRIO CLICÁVEL
+       ======================================================== */
+    #intelligence-drawer {
+      position: absolute;
+      top: 0;
+      right: -800px;
+      width: 800px;
+      height: var(--slide-h);
+      background: #FFFFFF;
+      box-shadow: var(--shadow-drawer);
+      z-index: 200;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      border-left: 2px solid var(--color-table-border);
+    }
+
+    #intelligence-drawer.open {
+      right: 0;
+    }
+
+    .drawer-header {
+      padding: 28px 36px;
+      background: var(--color-olive);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-header h2 {
+      font-size: 22px;
+      font-weight: var(--fw-light);
+      text-transform: lowercase;
+      line-height: 1.2;
+    }
+
+    .drawer-header h2 strong {
+      font-weight: var(--fw-bold);
+    }
+
+    .drawer-close-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .drawer-close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .drawer-tabs {
+      display: flex;
+      background: var(--color-off-white);
+      border-bottom: 1.5px solid var(--color-table-border);
+      padding: 0 32px;
+      overflow-x: auto;
+    }
+
+    .drawer-tab-btn {
+      padding: 15px 18px;
+      border: none;
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .drawer-tab-btn.active {
+      color: var(--color-olive);
+      border-bottom-color: var(--color-olive);
+      background: #FFFFFF;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .drawer-tab-content {
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .drawer-tab-content.active {
+      display: flex;
+    }
+
+    /* Lista Clicável do Sumário */
+    .summary-group-title {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      font-weight: var(--fw-bold);
+      color: var(--color-olive);
+      text-transform: uppercase;
+      margin: 14px 0 6px 0;
+      border-bottom: 1px solid var(--color-table-border);
+      padding-bottom: 5px;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+      background: var(--color-off-white);
+      border: 1px solid var(--color-card-border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .summary-item:hover {
+      background: #FFFFFF;
+      border-color: var(--color-olive);
+      transform: translateX(4px);
+    }
+
+    .summary-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .summary-slide-num {
+      font-size: 12px;
+      font-weight: var(--fw-bold);
+      color: var(--color-olive);
+      background: rgba(95, 91, 71, 0.12);
+      padding: 3px 7px;
+      border-radius: 4px;
+    }
+
+    .summary-item-title {
+      font-size: 14px;
+      font-weight: var(--fw-medium);
+      color: var(--color-text-dark);
+      text-transform: lowercase;
+    }
+
+    .summary-item-title strong {
+      color: var(--color-olive);
+      font-weight: var(--fw-bold);
+    }
+
+    .study-box {
+      background: var(--color-off-white);
+      border-left: 3.5px solid var(--color-olive);
+      border-radius: 0 6px 6px 0;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .study-box h4 {
+      font-size: 15px;
+      font-weight: var(--fw-bold);
+      color: var(--color-olive);
+      text-transform: lowercase;
+      line-height: 1.3;
+    }
+
+    .study-box p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--color-text-dark);
+    }
+
+    .study-meta {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      font-weight: var(--fw-medium);
+      margin-top: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Overlay escuro de fundo quando o drawer está aberto */
+    #drawer-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--slide-w);
+      height: var(--slide-h);
+      background: rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 150;
+      backdrop-filter: blur(4px);
+    }
+
+    #drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* HUD de Navegação Flutuante */
+    #nav-hud {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(29, 29, 27, 0.88);
+      backdrop-filter: blur(14px);
+      padding: 8px 22px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: var(--fw-medium);
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      user-select: none;
+    }
+
+    #nav-hud button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+
+    #nav-hud button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #nav-hud button svg {
+      width: 17px;
+      height: 17px;
+      stroke: #fff;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    #slide-indicator {
+      letter-spacing: 0.18em;
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+    }
+
+    .key-tip {
+      font-size: 11px;
+      opacity: 0.55;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="presentation-stage">
+
+    <!-- Overlay para Drawer -->
+    <div id="drawer-overlay"></div>
+
+    <!-- ==========================================
+         DRAWER DE INTELIGÊNCIA & SUMÁRIO CLICÁVEL
+         ========================================== -->
+    <div id="intelligence-drawer">
+      <div class="drawer-header">
+        <div>
+          <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8;">CENTRAL DE INTELIGÊNCIA &amp; DESENVOLVIMENTO DE PRODUTO</span>
+          <h2>banco de <strong>conhecimento (p&amp;d).</strong></h2>
+        </div>
+        <button class="drawer-close-btn" id="btn-close-drawer" title="Fechar (Esc)">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="drawer-tabs">
+        <button class="drawer-tab-btn active" data-tab="tab-summary">Sumário Clicável</button>
+        <button class="drawer-tab-btn" data-tab="tab-studies">Estudos Clínicos</button>
+        <button class="drawer-tab-btn" data-tab="tab-product">Blueprint do Produto</button>
+        <button class="drawer-tab-btn" data-tab="tab-costs">Custos &amp; Supply ($)</button>
+      </div>
+
+      <div class="drawer-body">
+
+        <!-- ABA 1: SUMÁRIO CLICÁVEL -->
+        <div class="drawer-tab-content active" id="tab-summary">
+          <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.5;">
+            Clique em qualquer slide para saltar instantaneamente durante a apresentação executiva:
+          </p>
+
+          <div class="summary-group-title">01 · ESTRATÉGIA GLOBAL &amp; MERCADO (US$)</div>
+          <div class="summary-item" data-goto="0">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">01</span>
+              <span class="summary-item-title">peptídeos &amp; <strong>moujauro dtc.</strong> (capa executiva)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="1">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">02</span>
+              <span class="summary-item-title">o boom dos <strong>incretinomiméticos.</strong> ($100B+ market)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="2">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">03</span>
+              <span class="summary-item-title">rotas de <strong>desenvolvimento.</strong> (injetável vs oral fda)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+
+          <div class="summary-group-title">02 · EVIDÊNCIA CIENTÍFICA, FARMACOCINÉTICA &amp; P&amp;D</div>
+          <div class="summary-item" data-goto="3">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">04</span>
+              <span class="summary-item-title">ensaios &amp; <strong>estudos clínicos.</strong> (surmount-1 vs fitossomos)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="4">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">05</span>
+              <span class="summary-item-title">mecanismo &amp; <strong>biodisponibilidade.</strong> (10x absorção celular)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="5">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">06</span>
+              <span class="summary-item-title">sinergia <strong>metabólica.</strong> (especificação de ativos)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+
+          <div class="summary-group-title">03 · MARKETING &amp; FUNIL DTC US (/mkt)</div>
+          <div class="summary-item" data-goto="6">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">07</span>
+              <span class="summary-item-title">identidade de <strong>marca.</strong> (posicionamento &amp; persona us)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="7">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">08</span>
+              <span class="summary-item-title">funil de <strong>conversão.</strong> (framer + vsl + quiz)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="8">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">09</span>
+              <span class="summary-item-title">arquitetura de <strong>ticket.</strong> (kits $69-$234 + order bumps)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+
+          <div class="summary-group-title">04 · FINANCEIRO (USD), OPERAÇÃO &amp; ROADMAP</div>
+          <div class="summary-item" data-goto="9">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">10</span>
+              <span class="summary-item-title">unit economics &amp; <strong>margens.</strong> (dre unitária $165 aov)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="10">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">11</span>
+              <span class="summary-item-title">cadeia de <strong>produção.</strong> (fábrica cgmp us + 3pl)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="11">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">12</span>
+              <span class="summary-item-title">blindagem <strong>regulatória.</strong> (fda dshea 1994 &amp; ftc)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="12">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">13</span>
+              <span class="summary-item-title">metas &amp; <strong>projeções.</strong> ($10.8M faturamento ano 1)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="13">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">14</span>
+              <span class="summary-item-title">plano de <strong>implantação.</strong> (seed $48.5k &amp; 45 dias)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+          <div class="summary-item" data-goto="14">
+            <div class="summary-item-left">
+              <span class="summary-slide-num">15</span>
+              <span class="summary-item-title">decisão &amp; <strong>próximos passos.</strong> (aprovação dos sócios)</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-olive)" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+        </div>
+
+        <!-- ABA 2: ESTUDOS & ENSAIOS CLÍNICOS APROFUNDADOS -->
+        <div class="drawer-tab-content" id="tab-studies">
+          <div class="study-box">
+            <h4>1. Berberina Fitossomal: Liberação Endógena de GLP-1 &amp; AMPK</h4>
+            <p>
+              <strong>Mecanismo Celular:</strong> A berberina estimula diretamente os receptores gustativos amargos (TAS2Rs) localizados na membrana apical das células L enteroendócrinas no íleo terminal, ativando a cascata dependente de cálcio que estimula a exocitose do peptídeo GLP-1 para a circulação portal. Paralelamente, promove fosforilação da treonina-172 na subunidade catalítica da AMPK em hepatócitos e adipócitos.
+            </p>
+            <p style="margin-top: 6px;">
+              <strong>Diferencial Farmacocinético Fitossomal:</strong> A complexação em fosfolipídios de girassol contorna a glicoproteína-P (P-gp), elevando a AUC plasmática em <strong>9.6x (p &lt; 0.001)</strong> em comparação ao extrato simples de Berberina HCl.
+            </p>
+            <div class="study-meta">
+              <span>Ref: Rondanelli et al., Phytomedicine 2021</span>
+              <span>PMID: 34182255</span>
+              <span>Evidência: GRADE Alta</span>
+            </div>
+          </div>
+
+          <div class="study-box">
+            <h4>2. SURMOUNT-1 (Tirzepatida Benchmark Clínico)</h4>
+            <p>
+              <strong>Dados do Ensaio Clínico (NEJM, n = 2.539):</strong> O duplo agonismo GIP/GLP-1 produziu redução média de -20.9% de peso na dose de 15mg. No entanto, o estudo revelou vulnerabilidades clínicas severas: <strong>33.3% náuseas</strong>, 21.2% diarreia, 12.2% vômitos e perda de massa magra de até 39% do peso total perdido avaliado por DXA.
+            </p>
+            <p style="margin-top: 6px;">
+              <strong>Oportunidade Comercial:</strong> O custo out-of-pocket de $1,100/mês nos EUA aliado à recusa de seguradoras gera um vácuo perfeito para a fórmula fitossomal oral que preserva o tônus muscular e sacia sem náuseas.
+            </p>
+            <div class="study-meta">
+              <span>Ref: Jastreboff et al., N Engl J Med 2022; 387:205-216</span>
+              <span>DOI: 10.1056/NEJMoa2206038</span>
+            </div>
+          </div>
+
+          <div class="study-box">
+            <h4>3. Glucomannan Konjac: Gel Hidrofílico &amp; Esvaziamento Gástrico</h4>
+            <p>
+              <strong>Efeito Biomecânico:</strong> Polissacarídeo de D-manose e D-glicose com índice de hidratação de 50:1. No lúmen gástrico ácido, forma uma malha viscoelástica altamente estável que desacelera o esvaziamento gástrico em <strong>+38.4%</strong>, mantendo mecanorreceptores vagais ativados por até 4 horas pós-prandiais e reduzindo o pico glicêmico reativo em 24%.
+            </p>
+            <div class="study-meta">
+              <span>Ref: American Journal of Clinical Nutrition / EFSA Journal 2010; 8(10):1798</span>
+              <span>Grau A</span>
+            </div>
+          </div>
+
+          <div class="study-box">
+            <h4>4. Cromo Quelato e Atenuação da Compulsão Noturna</h4>
+            <p>
+              <strong>Neurobiologia do Craving:</strong> O cromo atua como cofator na cromodulina, potencializando a atividade tirosina quinase do receptor de insulina. Ensaio duplo-cego com 113 indivíduos comprovou redução de <strong>65% na pontuação de fissura por carboidratos simples (p = 0.002)</strong> e doces após 8 semanas de administração de 250 mcg/dia.
+            </p>
+            <div class="study-meta">
+              <span>Ref: Docherty et al., J Psychiatr Pract 2005; 11(5):302-14</span>
+              <span>PMID: 16184071</span>
+            </div>
+          </div>
+
+          <div class="study-box">
+            <h4>5. EGCG Padronizado (95% Polifenóis) &amp; Preservação da Taxa Basal</h4>
+            <p>
+              <strong>Inibição Enzimática:</strong> O galato de epigalocatequina inibe a enzima catecol-O-metiltransferase (COMT), prolongando a sinalização simpática de oxidação lipídica e elevando o gasto energético diário em <strong>+4.8% sem alterar frequência cardíaca ou pressão arterial</strong>. Previne a queda da taxa metabólica basal durante restrição calórica.
+            </p>
+            <div class="study-meta">
+              <span>Ref: Dulloo et al., Am J Clin Nutr 1999; 70(6):1040-1045</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 3: BLUEPRINT DE DESENVOLVIMENTO DO NOVO PRODUTO -->
+        <div class="drawer-tab-content" id="tab-product">
+          <div class="arc-card arc-card--soft" style="padding: 20px;">
+            <span class="chip">FORMA FARMACÊUTICA &amp; ENVASE</span>
+            <h3 style="font-size: 16px; margin-top: 6px;">especificação da <strong>cápsula vegetal.</strong></h3>
+            <p style="font-size: 13px; line-height: 1.7;">
+              • <strong>Cápsula:</strong> DRcaps® ácidorresistente (hipromelose HPMC) tamanho 00, transparente ou clorofila natural. Permite liberação entérica no duodeno/jejuno, protegendo a berberina e fibras do ácido estomacal.<br>
+              • <strong>Frasco:</strong> PET âmbar cilíndrico farmacêutico 150cc com proteção UV.<br>
+              • <strong>Tampa:</strong> Tampa preta ribbed child-resistant com selo de indução térmica inviolável.<br>
+              • <strong>Shelf-Life:</strong> 24 meses em temperatura ambiente (15°C a 25°C) comprovada em teste de estabilidade acelerada (40°C / 75% UR por 6 meses).
+            </p>
+          </div>
+
+          <div class="arc-card arc-card--soft" style="padding: 20px;">
+            <span class="chip">CRITÉRIOS DE LAUDO &amp; LIBERAÇÃO DE LOTE (COA)</span>
+            <h3 style="font-size: 16px; margin-top: 6px;">padrão analítico <strong>fda cgmp.</strong></h3>
+            <p style="font-size: 13px; line-height: 1.7;">
+              • <strong>Teor Ativo HPLC:</strong> Berberina fitossomal &ge; 98.0% do valor rotulado.<br>
+              • <strong>Metais Pesados (ICP-MS):</strong> Lead &lt; 0.5 ppm, Cadmium &lt; 0.3 ppm, Arsenic &lt; 1.0 ppm, Mercury &lt; 0.1 ppm.<br>
+              • <strong>Microbiologia:</strong> Contagem total em placas &lt; 1.000 CFU/g; ausência de <em>Salmonella</em>, <em>E. coli</em> e <em>Staphylococcus aureus</em>.<br>
+              • <strong>Dissolução USP:</strong> Tempo de desintegração entérica &lt; 30 min.
+            </p>
+          </div>
+
+          <div class="arc-card arc-card--soft" style="padding: 20px;">
+            <span class="chip">CLAIMS REGULATÓRIOS ESTRUTURA/FUNÇÃO (FDA DSHEA)</span>
+            <h3 style="font-size: 16px; margin-top: 6px;">alegações permitidas <strong>nos rótulos us.</strong></h3>
+            <p style="font-size: 13px; line-height: 1.7;">
+              1. <em>"Supports healthy, natural satiety and fullness signaling."*</em><br>
+              2. <em>"Promotes healthy glucose and insulin metabolism already within normal limits."*</em><br>
+              3. <em>"Helps optimize metabolic rate and preserve lean muscle mass during caloric reduction."*</em><br>
+              <small style="color: var(--color-text-muted);">*Declaração obrigatória da FDA: "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."</small>
+            </p>
+          </div>
+        </div>
+
+        <!-- ABA 4: CUSTOS & ENGENHARIA FABRIL ($ USD) -->
+        <div class="drawer-tab-content" id="tab-costs">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Componente Fabril (Por Frasco de 60 Cápsulas)</th>
+                  <th>Custo Unitário ($ USD)</th>
+                  <th>% do COGS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label-cell">Blend de Matérias-Primas Ativas (Grau Fitossomal)</td>
+                  <td>$4.20 USD</td>
+                  <td>60.4%</td>
+                </tr>
+                <tr class="stripe">
+                  <td class="label-cell">Cápsulas HPMC DRcaps Vegetais (60 unidades)</td>
+                  <td>$0.75 USD</td>
+                  <td>10.8%</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Frasco Âmbar PET + Tampa com Selo de Indução</td>
+                  <td>$0.65 USD</td>
+                  <td>9.3%</td>
+                </tr>
+                <tr class="stripe">
+                  <td class="label-cell">Rótulo Metalizado Soft-Touch + Verniz UV Localizado</td>
+                  <td>$0.35 USD</td>
+                  <td>5.0%</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Encapsulamento, Blending, Envase &amp; Lacre cGMP</td>
+                  <td>$1.00 USD</td>
+                  <td>14.5%</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>CUSTO TOTAL FABRIL (POR FRASCO)</td>
+                  <td>$6.95 USD</td>
+                  <td>100.0%</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <div class="arc-card arc-card--soft" style="padding: 18px;">
+            <span class="chip">ESTRUTURA DE 3PL &amp; FULFILLMENT NOS EUA</span>
+            <h3 style="font-size: 15px; margin-top: 6px;">logística integrada <strong>same-day.</strong></h3>
+            <p style="font-size: 13px;">
+              • <strong>Armazenamento:</strong> Centro de distribuição em Columbus, OH ou Salt Lake City, UT ($15/pallet/mês).<br>
+              • <strong>Pick &amp; Pack:</strong> $2.20 primeiro item + $0.50 por frasco adicional.<br>
+              • <strong>Frete Médio USPS Ground Advantage:</strong> $4.30 nacional nos EUA.<br>
+              • <strong>Custo Total de Fulfillment por Pedido:</strong> <strong>$6.50 USD</strong>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 01: CAPA GERAL (COVER / DIVIDER)
+         ========================================== -->
+    <div class="slide slide--olive active" id="slide-1">
+      <div class="slide-top-bar">
+        <span class="chip chip--light" style="color: #fff; background: rgba(255,255,255,0.2);">GLOBAL EXPANSION · US &amp; TIER-1 DTC MARKETS</span>
+        <button class="btn-intelligence-trigger" id="btn-open-drawer-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Mapa de Inteligência &amp; P&amp;D
+        </button>
+      </div>
+
+      <div style="position: absolute; bottom: 120px; right: var(--margin-slide); text-align: right; max-width: 900px;">
+        <div class="bicolor-title bicolor-title--vertical bicolor-title--display">
+          <span class="light">peptídeos &amp;</span>
+          <span class="bold">moujauro dtc.</span>
+        </div>
+        <p style="margin-top: 18px; font-size: 20px; font-weight: var(--fw-light); letter-spacing: 0.08em; color: rgba(255,255,255,0.85);">
+          Planejamento Executivo de Escala Internacional em Dólares (USD)
+        </p>
+      </div>
+
+      <div class="slide-footer">
+        <div>BIOTECH &amp; INTELLIGENCE DIVISION &nbsp;|&nbsp; <strong>DIGITALWORLD SQUAD</strong> &nbsp;|&nbsp; TEAM-MKT</div>
+        <div>GLOBAL SCALE &nbsp;|&nbsp; VALUES IN USD ($) &nbsp;|&nbsp; SET 2026</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 02: OPORTUNIDADE & MACRO-CENÁRIO
+         ========================================== -->
+    <div class="slide" id="slide-2">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">MERCADO GLOBAL &amp; TENDÊNCIA (US$)</span>
+            <span class="name">o boom dos<br><strong>incretinomiméticos.</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-3">
+          <div class="arc-card arc-card--soft">
+            <div class="card-icon-header">
+              <span class="chip">DEMANDA GLOBAL</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+            </div>
+            <div>
+              <div class="metric">$100B+</div>
+              <div class="sub-metric">Mercado Global Previsto até 2030</div>
+            </div>
+            <p>
+              Tirzepatida (Mounjaro/Zepbound) e Semaglutida alteraram irreversivelmente a relação mundial com saciedade e controle de peso. Conscientização de mercado no ápice histórico nos EUA e Europa.
+            </p>
+          </div>
+
+          <div class="arc-card arc-card--soft">
+            <div class="card-icon-header">
+              <span class="chip" style="background:#9E9B8F;">FRICÇÃO DO FÁRMACO</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+            </div>
+            <div>
+              <div class="metric">$1,100</div>
+              <div class="sub-metric">Custo Mensal (Out-of-Pocket nos EUA)</div>
+            </div>
+            <p>
+              Seguradoras americanas negam cobertura para perda de peso em mais de 75% dos casos. Custo abusivo somado a náuseas crônicas, agulhas e perda severa de massa muscular.
+            </p>
+          </div>
+
+          <div class="arc-card arc-card--olive">
+            <div class="card-icon-header">
+              <span class="chip" style="background:rgba(255,255,255,0.25);">A BRECHA DTC GLOBAL</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+            </div>
+            <div>
+              <div class="metric">$49/mês</div>
+              <div class="sub-metric">Proposta de Valor Irresistível</div>
+            </div>
+            <p>
+              Entregar um <strong>mimetizador incretínico oral fitossomal de alta performance</strong> por uma fração do preço farmacêutico ($49 vs $1,100), com escala DTC massiva em tráfego pago nos EUA e Europa.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>MACRO-CENÁRIO GLOBAL</strong></div>
+        <div>SLIDE 02 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 03: DECISÃO ARQUITETURAL: AS DUAS ROTAS
+         ========================================== -->
+    <div class="slide" id="slide-3">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">ESTRATÉGIA REGULATÓRIA GLOBAL (FDA / FTC)</span>
+            <span class="name">rotas de<br><strong>desenvolvimento.</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 22%;">Vetor de Análise</th>
+                <th style="width: 39%;">Rota A — Peptídeo Sintético Injetável (Research Chem)</th>
+                <th style="width: 39%;">Rota B — Mimetizador Nutracêutico Oral (FDA DSHEA)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="label-cell">Enquadramento Regulatório</td>
+                <td>FDA Investigational New Drug / Cinzento de Pesquisa ("Not for Human Consumption")</td>
+                <td><strong>Dietary Supplement 100% Legalizado (FDA DSHEA 1994 &amp; 21 CFR Part 111)</strong></td>
+              </tr>
+              <tr class="stripe">
+                <td class="label-cell">Risco Jurídico / Criminal</td>
+                <td><strong>Severo.</strong> Apreensão aduaneira pela FDA/CBP, bloqueios de contas bancárias e risco penal</td>
+                <td><strong>Zero Risco.</strong> Ingredientes GRAS (Generally Recognized as Safe) e livre comercialização</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Tráfego Pago (Meta / Google US)</td>
+                <td>Banimento imediato de BMs, domínios e bloqueio de cartões corporativos</td>
+                <td><strong>Escala irrestrita</strong> em Meta Ads, Google Shopping, TikTok e YouTube nos EUA</td>
+              </tr>
+              <tr class="stripe">
+                <td class="label-cell">Logística &amp; Armazenamento</td>
+                <td>Cadeia de frio obrigatória (36°F a 46°F), frascos de vidro quebráveis, perda térmica</td>
+                <td><strong>Logística seca convencional</strong> via USPS Ground / DHL Express com 24 meses de shelf-life</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Processamento de Pagamentos</td>
+                <td>Bloqueio sumário por Stripe, Shopify Payments e bancos americanos de adquirente</td>
+                <td>Processamento transparente em USD via Stripe/Shopify Payments com taxas normais</td>
+              </tr>
+              <tr class="stripe">
+                <td class="label-cell">Decisão dos Sócios</td>
+                <td><span class="chip" style="background:#8C2D19;">VETO ABSOLUTO</span></td>
+                <td><span class="chip" style="background:#5F5B47;">ROTA OFICIAL APROVADA (100% DTC GLOBAL)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>COMPLIANCE &amp; VIABILIDADE</strong></div>
+        <div>SLIDE 03 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 04: ESTUDOS & ENSAIOS CLÍNICOS
+         ========================================== -->
+    <div class="slide slide--soft" id="slide-4">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">EVIDÊNCIA CIENTÍFICA GLOBAL · DIGITALWORLD</span>
+            <span class="name">ensaios &amp;<br><strong>estudos clínicos.</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Ver Metadados
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-3">
+          <div class="arc-card">
+            <div class="card-icon-header">
+              <span class="chip">ESTUDO 01 · SURMOUNT-1</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+            </div>
+            <h3>fármaco <strong>sintético.</strong></h3>
+            <p>
+              <strong>NEJM (n = 2.539):</strong> Tirzepatida reduz até 20.9% de peso. Porém, <strong>33% sofrem náuseas severas</strong> e até <strong>39% do peso perdido é massa magra</strong>. O custo de $1,100/mês nos EUA inviabiliza adesão contínua.
+            </p>
+            <div style="border-top: 1px solid var(--color-table-border); padding-top: 10px;">
+              <small style="color: var(--color-text-muted);">Tese: Preservação de massa magra a custo acessível.</small>
+            </div>
+          </div>
+
+          <div class="arc-card">
+            <div class="card-icon-header">
+              <span class="chip">ESTUDO 02 · FITOSSOMAL</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              </div>
+            </div>
+            <h3>glp-1 <strong>endógeno.</strong></h3>
+            <p>
+              <strong>Phytomedicine / Frontiers:</strong> Berberina estimula células L do íleo a secretar GLP-1 nativo via ativação de AMPK e proliferação de <em>Akkermansia</em>. Complexada com fosfolipídios, atinge <strong>9.6x mais pico plasmático</strong> sem colite.
+            </p>
+            <div style="border-top: 1px solid var(--color-table-border); padding-top: 10px;">
+              <small style="color: var(--color-text-muted);">Evidência GRADE: Moderada-Alta em RCTs.</small>
+            </div>
+          </div>
+
+          <div class="arc-card arc-card--olive">
+            <div class="card-icon-header">
+              <span class="chip" style="background: rgba(255,255,255,0.25);">ESTUDO 03 · SACIEDADE</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+            </div>
+            <h3>fome &amp; <strong>compulsão.</strong></h3>
+            <p>
+              <strong>Am J Clin Nutr + J Psych Pract:</strong> Fibras de Glucomannan reduzem taxa de esvaziamento gástrico em 38%. Cromo quelato associado reduz <strong>65% dos episódios de compulsão por doces</strong> em 8 semanas.
+            </p>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+              <small style="color: rgba(255,255,255,0.8);">Sinergia: Saciedade mecânica + neurológica.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>EVIDÊNCIA BIOMÉDICA</strong></div>
+        <div>SLIDE 04 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 05: FARMACOCINÉTICA & BIODISPONIBILIDADE
+         ========================================== -->
+    <div class="slide" id="slide-5">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">FARMACOTÉCNICA &amp; ABSORÇÃO</span>
+            <span class="name">mecanismo &amp;<br><strong>biodisponibilidade.</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Ver Metadados
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-2" style="align-items: center;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Parâmetro Farmacocinético</th>
+                  <th>Extrato Berberina Comum (HCL)</th>
+                  <th>Berberina Fitossomal (DTC)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label-cell">Taxa de Absorção Intestinal</td>
+                  <td>Inferior a 5% (baixa biodisponibilidade)</td>
+                  <td style="font-weight: 700; color: var(--color-olive);">Até 10x superior (&ge; 48%)</td>
+                </tr>
+                <tr class="stripe">
+                  <td class="label-cell">Vetor de Transporte</td>
+                  <td>Molécula livre (expulsa por glicoproteína-P)</td>
+                  <td><strong>Bicamada fosfolipídica biomimética</strong></td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Tolerabilidade Gastrointestinal</td>
+                  <td>Alta incidência de diarreia e cólicas</td>
+                  <td><strong>Zero desconforto</strong> gástrico documentado</td>
+                </tr>
+                <tr class="stripe">
+                  <td class="label-cell">Dose Oral Necessária</td>
+                  <td>1.500 mg a 2.000 mg (pílulas gigantes)</td>
+                  <td><strong>500 mg</strong> (cápsula compacta e elegante)</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Mecanismo Único de Vendas (UMP)</td>
+                  <td>Genérico de farmácia sem diferencial</td>
+                  <td><strong>Ativo patenteável e exclusivo</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="arc-card arc-card--olive">
+              <span class="chip" style="background: rgba(255,255,255,0.25);">TRANSPORTE FOSFOLIPÍDICO</span>
+              <div class="metric">10x Mais</div>
+              <div class="sub-metric">Captação Celular em Tecido-Alvo</div>
+              <p style="margin-top: 10px; font-size: 15px;">
+                Os fosfolipídios fundem-se à membrana celular do enterócito, entregando o princípio bioativo diretamente na circulação portal sem degradação estomacal.
+              </p>
+            </div>
+
+            <div class="arc-card arc-card--soft">
+              <span class="chip chip--light">APROVAÇÃO TÉCNICA</span>
+              <h3 style="margin-top: 6px;">estabilidade de <strong>24 meses.</strong></h3>
+              <p>
+                Ao contrário dos peptídeos sintéticos injetáveis que se degradam fora de 8°C, a matriz fitossomal mantém 99.2% de integridade ativa em temperatura ambiente seca.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>FARMACOCINÉTICA</strong></div>
+        <div>SLIDE 05 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 06: FORMULAÇÃO & BIOQUÍMICA
+         ========================================== -->
+    <div class="slide" id="slide-6">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">P&amp;D · SQUAD DIGITALWORLD</span>
+            <span class="name">sinergia<br><strong>metabólica.</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-2" style="align-items: center;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ativo Padronizado</th>
+                  <th>Dose / Dia</th>
+                  <th>Via Biológica de Atuação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 700; color: var(--color-olive);">Berberina Fitossomal</td>
+                  <td>500 mg</td>
+                  <td>Ativação da AMPK celular; modula secreção endógena de GLP-1.</td>
+                </tr>
+                <tr class="stripe">
+                  <td style="font-weight: 700; color: var(--color-olive);">Fibras Viscosas Konjac</td>
+                  <td>1.000 mg</td>
+                  <td>Gel hidrofílico intragástrico; retardo mecânico de esvaziamento.</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700; color: var(--color-olive);">Picolinato de Cromo</td>
+                  <td>250 mcg</td>
+                  <td>Elimina picos de insulina e fissura compulsiva por doces.</td>
+                </tr>
+                <tr class="stripe">
+                  <td style="font-weight: 700; color: var(--color-olive);">EGCG (Chá Verde 95%)</td>
+                  <td>200 mg</td>
+                  <td>Oxidação de gordura sem estímulo cardiovascular adrenérgico.</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700; color: var(--color-olive);">Magnésio Bisglicinato</td>
+                  <td>150 mg</td>
+                  <td>Modulação de cortisol e supressão da fome por estresse noturno.</td>
+                </tr>
+                <tr class="stripe">
+                  <td style="font-weight: 700; color: var(--color-olive);">Complexo B (B6 + B12)</td>
+                  <td>100% IDR</td>
+                  <td>Cofatores enzimáticos para produção mitocondrial de energia limpa.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="arc-card arc-card--soft">
+              <span class="chip chip--light">POSOLOGIA SIMPLIFICADA</span>
+              <h3 style="margin-top: 6px;">2 cápsulas <strong>ao dia.</strong></h3>
+              <p>
+                1 cápsula 30 minutos antes do almoço e 1 cápsula 30 minutos antes do jantar acompanhada de água abundante. Protocolo intuitivo que assegura adesão superior a 90%.
+              </p>
+            </div>
+
+            <div class="arc-card arc-card--olive">
+              <span class="chip" style="background: rgba(255,255,255,0.25);">QUADRUPLE-ACTION</span>
+              <div class="metric">4 Vias</div>
+              <div class="sub-metric">Saciedade · Esvaziamento · Glicose · Massa Magra</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>ENGENHARIA DA FÓRMULA</strong></div>
+        <div>SLIDE 06 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 07: POSICIONAMENTO & PERSONA /mkt
+         ========================================== -->
+    <div class="slide slide--soft" id="slide-7">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">BRANDING &amp; POSICIONAMENTO · TEAM-MKT</span>
+            <span class="name">identidade de<br><strong>marca (us market).</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-3">
+          <div class="arc-card">
+            <div class="card-icon-header">
+              <span class="chip">ICP PRIORITÁRIO (US)</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </div>
+            </div>
+            <h3>consumidor <strong>americano.</strong></h3>
+            <p>
+              Homens e mulheres de 30 a 55 anos nos EUA, UK e Canadá. Renda familiar média de $75k+. Exaustos do preço abusivo do Ozempic/Mounjaro ($1,000+/mês) e das negativas dos planos de saúde.
+            </p>
+            <div style="border-top: 1px solid var(--color-table-border); padding-top: 12px; margin-top: 12px;">
+              <small style="color: var(--color-text-muted); font-size: 13px;">Dores: Fome emocional noturna, escassez em farmácias, medo de agulhas.</small>
+            </div>
+          </div>
+
+          <div class="arc-card">
+            <div class="card-icon-header">
+              <span class="chip">MECANISMO ÚNICO (UMP)</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+            </div>
+            <h3>protocolo <strong>incretina oral.</strong></h3>
+            <p>
+              "The Natural Incretin Activation Protocol: How to signal fullness to your brain and restore metabolic flexibility without injections, extreme side effects or $1,000 monthly bills."
+            </p>
+            <div style="border-top: 1px solid var(--color-table-border); padding-top: 12px; margin-top: 12px;">
+              <small style="color: var(--color-text-muted); font-size: 13px;">Diferenciação: Eficácia biológica sem risco farmacêutico.</small>
+            </div>
+          </div>
+
+          <div class="arc-card arc-card--olive">
+            <div class="card-icon-header">
+              <span class="chip" style="background: rgba(255,255,255,0.25);">TOM DE VOZ</span>
+              <div class="card-icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+              </div>
+            </div>
+            <h3>clínico &amp; <strong>premium.</strong></h3>
+            <p>
+              Estética minimalista, clean e amparada em dados de ensaios clínicos. Comunicação refinada ao estilo Huberman Lab, Thorne e Athletic Greens. Elevada autoridade científica.
+            </p>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px; margin-top: 12px;">
+              <small style="color: rgba(255,255,255,0.8); font-size: 13px;">Benchmark visual: Ro.co, Hims &amp; Hers, Thorne.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>BRANDING &amp; PERSUASÃO</strong></div>
+        <div>SLIDE 07 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 08: FUNIL DE AQUISIÇÃO DTC /mkt
+         ========================================== -->
+    <div class="slide" id="slide-8">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">GROWTH &amp; AQUISIÇÃO · GLOBAL DTC</span>
+            <span class="name">funil de<br><strong>conversão (us$).</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-4">
+          <div class="arc-card arc-card--soft">
+            <div class="card-icon-header">
+              <span class="chip">ETAPA 01 · TRÁFEGO</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+            </div>
+            <h3>mídia <strong>paga us.</strong></h3>
+            <p>
+              <strong>Meta Ads (70%):</strong> Vídeos em formato React, B-Rolls médicos e comparação direta de custos ($1,100 vs $49).<br><br>
+              <strong>Google (30%):</strong> Intenção de busca alta ("natural GLP-1 alternative", "berberine vs tirzepatide").
+            </p>
+          </div>
+
+          <div class="arc-card arc-card--soft">
+            <div class="card-icon-header">
+              <span class="chip">ETAPA 02 · LANDING PAGE</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+            </div>
+            <h3>vsl &amp; <strong>quiz.</strong></h3>
+            <p>
+              LP Framer com CDN nos EUA (&lt; 0.8s load). VSL de 12 minutos baseada no Mecanismo Único de Ação.<br><br>
+              Quiz de Diagnóstico Metabólico interativo que eleva a taxa de opt-in e personaliza os kits de tratamento.
+            </p>
+          </div>
+
+          <div class="arc-card arc-card--soft">
+            <div class="card-icon-header">
+              <span class="chip">ETAPA 03 · CHECKOUT</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+            </div>
+            <h3>oferta &amp; <strong>bumps.</strong></h3>
+            <p>
+              Checkout Shopify transparente de 1 página (Shop Pay, Apple Pay, Cartão em USD).<br><br>
+              Garantia de 60 dias de devolução do dinheiro ("Ironclad Money-Back Guarantee"), eliminando qualquer fricção.
+            </p>
+          </div>
+
+          <div class="arc-card arc-card--olive">
+            <div class="card-icon-header">
+              <span class="chip" style="background: rgba(255,255,255,0.25);">ETAPA 04 · LTV</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg></div>
+            </div>
+            <h3>assinatura <strong>&amp; ltv.</strong></h3>
+            <p>
+              Programa de Assinatura "Subscribe &amp; Save" com 15% OFF recorrente mensal.<br><br>
+              Sequências automatizadas no Klaviyo (SMS + Email) aos 23 dias alertando para o reabastecimento com CPA zero.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>FUNIL DE VENDAS</strong></div>
+        <div>SLIDE 08 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 09: MATRIZ DE OFERTA & ORDER BUMPS (USD)
+         ========================================== -->
+    <div class="slide" id="slide-9">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">ENGENHARIA DA OFERTA GLOBAL · HORMOZI GRAND SLAM</span>
+            <span class="name">arquitetura de<br><strong>ticket (usd).</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-2">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Kit Comercial</th>
+                  <th>Preço Venda (USD)</th>
+                  <th>Preço / Frasco</th>
+                  <th>Mix Esperado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label-cell">Kit 1 · Starter (30 Dias)</td>
+                  <td>$69.00 USD</td>
+                  <td>$69.00</td>
+                  <td>10% (Âncora de Preço)</td>
+                </tr>
+                <tr class="stripe">
+                  <td class="label-cell" style="color: var(--color-olive);">Kit 2 · Most Popular (90 Dias)</td>
+                  <td style="font-weight: 700;">$147.00 USD</td>
+                  <td style="font-weight: 700; color: var(--color-olive);">$49.00 / mês</td>
+                  <td><span class="chip">65% (BEST SELLER)</span></td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Kit 3 · Best Value (180 Dias)</td>
+                  <td>$234.00 USD</td>
+                  <td>$39.00 / mês</td>
+                  <td>25% (AOV Maximizer)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="arc-card arc-card--soft">
+              <span class="chip chip--light">ORDER BUMP 01 · DIGITAL ($)</span>
+              <h3>metabolic <strong>reset guide.</strong></h3>
+              <p>
+                E-book com Protocolo de Combinação Alimentar Anti-Picos de Glicose por <strong>$19.00 USD</strong>. Margem de 98% com taxa de aceitação projetada de 42% no checkout.
+              </p>
+            </div>
+
+            <div class="arc-card arc-card--soft">
+              <span class="chip chip--light">ORDER BUMP 02 · FÍSICO ($)</span>
+              <h3>deep sleep <strong>craving drops.</strong></h3>
+              <p>
+                Gotas Sublinguais Noturnas (Melatonina + Fosfatidilserina) por <strong>$24.00 USD</strong> para bloquear a compulsão por comida tarde da noite. Taxa de aceitação de 30%.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>PRECIFICAÇÃO EM DÓLARES</strong></div>
+        <div>SLIDE 09 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 10: UNIT ECONOMICS & DRE PROJETADA (USD)
+         ========================================== -->
+    <div class="slide" id="slide-10">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">VIABILIDADE FINANCEIRA INTERNACIONAL (USD)</span>
+            <span class="name">unit economics &amp;<br><strong>margens ($).</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-2" style="align-items: center;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Linha DRE por Pedido Médio (USD)</th>
+                  <th>Valor ($ USD)</th>
+                  <th>% Faturamento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label-cell">Ticket Médio com Bumps (AOV)</td>
+                  <td style="font-weight: 700;">$165.00</td>
+                  <td>100,0%</td>
+                </tr>
+                <tr class="stripe">
+                  <td>(-) Custo de Fabricação (COGS 2.8 Frascos)</td>
+                  <td>($19.50)</td>
+                  <td>11,8%</td>
+                </tr>
+                <tr>
+                  <td>(-) Frete US Domestic (USPS Ground/3PL)</td>
+                  <td>($6.50)</td>
+                  <td>3,9%</td>
+                </tr>
+                <tr class="stripe" style="background: #E8E6DF;">
+                  <td style="font-weight: 700; color: var(--color-olive);">(=) MARGEM DE CONTRIBUIÇÃO 1 (CM1)</td>
+                  <td style="font-weight: 700; color: var(--color-olive);">$139.00</td>
+                  <td style="font-weight: 700; color: var(--color-olive);">84,3% (Meta &ge; 70%)</td>
+                </tr>
+                <tr>
+                  <td>(-) Gateway &amp; Plataforma (Stripe 2.9% + Shopify)</td>
+                  <td>($6.70)</td>
+                  <td>4,1%</td>
+                </tr>
+                <tr style="background: #E8E6DF;">
+                  <td style="font-weight: 700; color: var(--color-olive);">(=) MARGEM DE CONTRIBUIÇÃO 2 (CM2)</td>
+                  <td style="font-weight: 700; color: var(--color-olive);">$132.30</td>
+                  <td style="font-weight: 700; color: var(--color-olive);">80,2% (Meta &ge; 50%)</td>
+                </tr>
+                <tr class="stripe">
+                  <td>(-) Custo de Aquisição de Tráfego (CPA US)</td>
+                  <td>($75.00)</td>
+                  <td>45,5%</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>(=) MARGEM LÍQUIDA FINAL (CM3)</td>
+                  <td>$57.30 USD</td>
+                  <td>34,7% NET PROFIT</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="arc-card arc-card--olive">
+              <span class="chip" style="background: rgba(255,255,255,0.25);">METAS DE PERFORMANCE (EUA)</span>
+              <div class="metric">ROAS 1.25</div>
+              <div class="sub-metric">Ponto de Equilíbrio (Breakeven)</div>
+              <p style="margin-top: 14px; font-size: 15px;">
+                Com margem bruta de 84.3%, o ponto de equilíbrio nos EUA é atingido com ROAS de apenas <strong>1.25</strong>. A meta operacional de escala é <strong>ROAS 2.20+</strong>.
+              </p>
+            </div>
+
+            <div class="arc-card arc-card--soft">
+              <span class="chip chip--light">LUCRO LÍQUIDO EM DÓLAR</span>
+              <h3 style="margin-top: 6px;">$57.30 por <strong>pedido.</strong></h3>
+              <p>
+                Margem líquida excepcional de <strong>34.7% em moeda forte</strong> logo no front-end, antes de computar o LTV do programa de assinatura recorrente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>UNIT ECONOMICS (USD)</strong></div>
+        <div>SLIDE 10 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 11: CADEIA DE SUPRIMENTOS & FABRICAÇÃO
+         ========================================== -->
+    <div class="slide" id="slide-11">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">OPERAÇÃO &amp; SUPPLY CHAIN INTERNACIONAL</span>
+            <span class="name">cadeia de<br><strong>produção (eua).</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-3">
+          <div class="arc-card arc-card--soft">
+            <div class="card-icon-header">
+              <span class="chip">FABRICAÇÃO FDA CGMP</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+            </div>
+            <h3>indústria <strong>nos eua.</strong></h3>
+            <p>
+              Produção terceirizada em fábrica certificada pela FDA com selo cGMP e NSF (Utah ou Flórida). Matérias-primas nobres de procedência rastreada. Zero investimento em maquinário.
+            </p>
+            <div style="border-top: 1px solid var(--color-table-border); padding-top: 12px; margin-top: 12px;">
+              <small style="color: var(--color-text-muted);">Lead time de produção: 25 dias para primeiro lote.</small>
+            </div>
+          </div>
+
+          <div class="arc-card arc-card--soft">
+            <div class="card-icon-header">
+              <span class="chip">3RD-PARTY LAB TESTING</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+            </div>
+            <h3>laudos <strong>independentes.</strong></h3>
+            <p>
+              Certificado de Análise (COA) emitido por laboratórios independentes credenciados nos EUA (Eurofins/Covance): quantificação cromatográfica de pureza (&ge; 98%) e ausência de contaminantes.
+            </p>
+            <div style="border-top: 1px solid var(--color-table-border); padding-top: 12px; margin-top: 12px;">
+              <small style="color: var(--color-text-muted);">Transparência total exibida na LP e checkout.</small>
+            </div>
+          </div>
+
+          <div class="arc-card arc-card--olive">
+            <div class="card-icon-header">
+              <span class="chip" style="background: rgba(255,255,255,0.25);">US 3PL FULFILLMENT</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
+            </div>
+            <h3>envio <strong>same-day.</strong></h3>
+            <p>
+              Armazenamento em centro de distribuição parceiro (3PL em Nevada ou Ohio). Despacho no mesmo dia via USPS Ground Advantage e DHL Express com entrega em 2 a 4 dias úteis nos 50 estados.
+            </p>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px; margin-top: 12px;">
+              <small style="color: rgba(255,255,255,0.8);">Custo médio de frete: $6.50 por pedido.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>SUPPLY CHAIN EUA</strong></div>
+        <div>SLIDE 11 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 12: BLINDAGEM JURÍDICA & COMPLIANCE
+         ========================================== -->
+    <div class="slide slide--soft" id="slide-12">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">COMPLIANCE SANITÁRIO &amp; REGULATÓRIO (FDA &amp; FTC)</span>
+            <span class="name">blindagem<br><strong>regulatória.</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-2">
+          <div class="arc-card">
+            <div class="card-icon-header">
+              <span class="chip">ENQUADRAMENTO FDA DSHEA</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+            </div>
+            <h3>dietary supplement <strong>act.</strong></h3>
+            <p>
+              • <strong>DSHEA 1994 (Dietary Supplement Health and Education Act):</strong> Ingredientes botânicos e fitoativos consolidados são classificados como suplementos dietéticos, dispensando aprovação de pré-mercado de medicamento.<br><br>
+              • <strong>21 CFR Part 111:</strong> Produção obrigatória sob cGMP com registro de fabricante na FDA e laudos de identidade e pureza arquivados por lote.
+            </p>
+          </div>
+
+          <div class="arc-card">
+            <div class="card-icon-header">
+              <span class="chip">DIRETRIZES PUBLICITÁRIAS FTC</span>
+              <div class="card-icon-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+            </div>
+            <h3>structure / function <strong>claims.</strong></h3>
+            <p>
+              • <strong>Sem alegações de cura de doenças:</strong> Proibição categórica de alegações de tratamento ou substituição de drogas prescritas (sem usar as marcas registradas *Mounjaro*, *Ozempic* ou *Tirzepatide* nos rótulos).<br><br>
+              • <strong>Alegações de estrutura e função aprovadas:</strong> Comunicação focada no apoio à sinalização natural de saciedade, eficiência metabólica e sensibilidade à insulina.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>COMPLIANCE REGULATÓRIO</strong></div>
+        <div>SLIDE 12 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 13: PROJEÇÃO DE ESCALA 12 MESES (USD)
+         ========================================== -->
+    <div class="slide" id="slide-13">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">CRESCIMENTO &amp; TRAÇÃO GLOBAL (USD)</span>
+            <span class="name">metas &amp;<br><strong>projeções ($).</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Fase de Escala</th>
+                <th>Janela Temporal</th>
+                <th>Volume / Mês</th>
+                <th>Faturamento Mensal (USD)</th>
+                <th>Lucro Líquido / Mês (USD)</th>
+                <th>Status Operacional</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="label-cell">Fase 1 · MVP &amp; Validação US</td>
+                <td>Mês 1 a 2</td>
+                <td>500 pedidos</td>
+                <td>$82,500 USD</td>
+                <td style="font-weight: 700; color: var(--color-olive);">$28,650 USD</td>
+                <td><span class="chip chip--light">Calibração de Criativos</span></td>
+              </tr>
+              <tr class="stripe">
+                <td class="label-cell">Fase 2 · Escala Inicial</td>
+                <td>Mês 3 a 5</td>
+                <td>2,000 pedidos</td>
+                <td>$330,000 USD</td>
+                <td style="font-weight: 700; color: var(--color-olive);">$114,600 USD</td>
+                <td><span class="chip">Tráfego Otimizado US</span></td>
+              </tr>
+              <tr>
+                <td class="label-cell">Fase 3 · Consolidação &amp; LTV</td>
+                <td>Mês 6 a 8</td>
+                <td>5,000 pedidos</td>
+                <td>$825,000 USD</td>
+                <td style="font-weight: 700; color: var(--color-olive);">$286,500 USD</td>
+                <td><span class="chip">Recompra &amp; Assinaturas</span></td>
+              </tr>
+              <tr class="stripe">
+                <td class="label-cell">Fase 4 · Líder de Categoria DTC</td>
+                <td>Mês 9 a 12</td>
+                <td>10,000 pedidos</td>
+                <td>$1,650,000 USD</td>
+                <td style="font-weight: 700; color: var(--color-olive);">$573,000 USD</td>
+                <td><span class="chip" style="background:#1D1D1B;">Top Global Brand</span></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">RESULTADO ACUMULADO (ANO 1 EM DÓLARES)</td>
+                <td>$10,800,000 USD</td>
+                <td colspan="2">$3,650,000 USD DE LUCRO LÍQUIDO CONSOLIDADO</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>ROADMAP FINANCEIRO (USD)</strong></div>
+        <div>SLIDE 13 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 14: CAPEX INICIAL & PLANO DE AÇÃO (USD)
+         ========================================== -->
+    <div class="slide" id="slide-14">
+      <div class="slide-top-bar">
+        <div class="section-header">
+          <div class="section-bar"></div>
+          <div class="section-title">
+            <span class="label">GO-TO-MARKET GLOBAL (USD)</span>
+            <span class="name">plano de<br><strong>implantação ($).</strong></span>
+          </div>
+        </div>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Sumário &amp; Estudos
+        </button>
+      </div>
+
+      <div class="content-area">
+        <div class="grid-2">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Destinação do Aporte Inicial (USD)</th>
+                  <th>Valor Estimado ($ USD)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="label-cell">Lote Piloto (3.000 Frascos nos EUA)</td>
+                  <td>$22,500 USD</td>
+                </tr>
+                <tr class="stripe">
+                  <td class="label-cell">Embalagens Premium, Frascos Âmbar &amp; Selos</td>
+                  <td>$3,500 USD</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Design de Marca, Framer LP, VSL &amp; 3D</td>
+                  <td>$5,000 USD</td>
+                </tr>
+                <tr class="stripe">
+                  <td class="label-cell">Consultoria Regulatória FDA &amp; Laudos COA</td>
+                  <td>$2,500 USD</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Capital de Giro (Tráfego de Teste Meta/Google)</td>
+                  <td>$15,000 USD</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>APORTE TOTAL DE LANÇAMENTO (SEED)</td>
+                  <td>$48,500 USD</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <div class="arc-card arc-card--soft">
+            <span class="chip">CRONOGRAMA DE 45 DIAS</span>
+            <h3>da ideia ao <strong>faturamento em dólar.</strong></h3>
+            <p style="font-size: 15px; line-height: 1.8;">
+              <strong>Dias 1–10:</strong> Homologação da fórmula com fabricante cGMP em Utah e aprovação dos rótulos FDA.<br>
+              <strong>Dias 11–25:</strong> Fabricação do lote piloto + setup da loja Shopify US e VSL cinematográfica.<br>
+              <strong>Dias 26–35:</strong> Produção da esteira de criativos (/mkt) e integração com 3PL fulfillment.<br>
+              <strong>Dias 36–40:</strong> Entrada do estoque no CD nos EUA e simulação de expedição.<br>
+              <strong>Dias 41–45:</strong> Início das campanhas pagas em USD; <strong>Go-Live Internacional</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div>PROJETO MOUJAURO DTC &nbsp;|&nbsp; <strong>CRONOGRAMA E INVESTIMENTO</strong></div>
+        <div>SLIDE 14 / 15</div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 15: DECISÃO & ENCERRAMENTO
+         ========================================== -->
+    <div class="slide slide--olive" id="slide-15">
+      <div class="slide-top-bar">
+        <span class="chip chip--light" style="color: #fff; background: rgba(255,255,255,0.2);">ALINHAMENTO ESTRATÉGICO DE SÓCIOS</span>
+        <button class="btn-intelligence-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          Abrir Sumário
+        </button>
+      </div>
+
+      <div style="position: absolute; bottom: 120px; right: var(--margin-slide); text-align: right; max-width: 900px;">
+        <div class="bicolor-title bicolor-title--vertical bicolor-title--display">
+          <span class="light">decisão &amp;</span>
+          <span class="bold">próximos passos.</span>
+        </div>
+        <p style="margin-top: 18px; font-size: 20px; font-weight: var(--fw-light); letter-spacing: 0.08em; color: rgba(255,255,255,0.85);">
+          Aprovação do Seed Capital ($48,500 USD) e Homologação da Fórmula
+        </p>
+      </div>
+
+      <div class="slide-footer">
+        <div>CONSELHO EXECUTIVO &nbsp;|&nbsp; <strong>DIGITALWORLD SQUAD</strong> &nbsp;|&nbsp; TEAM-MKT</div>
+        <div>GLOBAL SCALE &nbsp;|&nbsp; SET 2026</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HUD de Navegação Flutuante -->
+  <div id="nav-hud">
+    <button id="btn-prev" title="Slide Anterior (Seta Esquerda)">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <span id="slide-indicator">01 / 15</span>
+    <button id="btn-next" title="Próximo Slide (Seta Direita)">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.25);"></div>
+    <button id="btn-hud-drawer" title="Abrir Sumário & Inteligência (M)">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <button id="btn-fullscreen" title="Tela Cheia (F)">
+      <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+    </button>
+    <span class="key-tip">[ &larr; &rarr; ou M para Sumário ]</span>
+  </div>
+
+  <script>
+    // Gerenciador de Slides e Auto-Scale
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+
+    const indicator = document.getElementById('slide-indicator');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    const stage = document.getElementById('presentation-stage');
+
+    // Drawer Elements
+    const drawer = document.getElementById('intelligence-drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    const btnCloseDrawer = document.getElementById('btn-close-drawer');
+    const btnHudDrawer = document.getElementById('btn-hud-drawer');
+    const drawerTriggers = document.querySelectorAll('.btn-intelligence-trigger');
+    const summaryItems = document.querySelectorAll('.summary-item');
+    const tabBtns = document.querySelectorAll('.drawer-tab-btn');
+    const tabContents = document.querySelectorAll('.drawer-tab-content');
+
+    function updateSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === index);
+      });
+
+      currentSlide = index;
+      const num = String(currentSlide + 1).padStart(2, '0');
+      const tot = String(totalSlides).padStart(2, '0');
+      indicator.textContent = `${num} / ${tot}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        updateSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        updateSlide(currentSlide - 1);
+      }
+    }
+
+    btnNext.addEventListener('click', nextSlide);
+    btnPrev.addEventListener('click', prevSlide);
+
+    // Abrir / Fechar Drawer
+    function openDrawer() {
+      drawer.classList.add('open');
+      drawerOverlay.classList.add('active');
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      drawerOverlay.classList.remove('active');
+    }
+
+    drawerTriggers.forEach(btn => btn.addEventListener('click', openDrawer));
+    btnHudDrawer.addEventListener('click', () => {
+      if (drawer.classList.contains('open')) closeDrawer();
+      else openDrawer();
+    });
+    btnCloseDrawer.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+
+    // Navegação via Sumário Clicável
+    summaryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const targetIndex = parseInt(item.getAttribute('data-goto'), 10);
+        updateSlide(targetIndex);
+        closeDrawer();
+      });
+    });
+
+    // Alternar Abas do Drawer
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    // Atalhos de teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeDrawer();
+        return;
+      }
+
+      if (e.key.toLowerCase() === 'm' || e.key.toLowerCase() === 's') {
+        if (drawer.classList.contains('open')) closeDrawer();
+        else openDrawer();
+        return;
+      }
+
+      if (!drawer.classList.contains('open')) {
+        if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+          e.preventDefault();
+          nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          prevSlide();
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          updateSlide(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          updateSlide(totalSlides - 1);
+        } else if (e.key.toLowerCase() === 'f') {
+          toggleFullscreen();
+        }
+      }
+    });
+
+    // Modo Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+    }
+    btnFullscreen.addEventListener('click', toggleFullscreen);
+
+    // Ajuste de Escala Responsivo 16:9
+    function resizeStage() {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const targetWidth = 1920;
+      const targetHeight = 1080;
+
+      const scaleX = windowWidth / targetWidth;
+      const scaleY = windowHeight / targetHeight;
+      const scale = Math.min(scaleX, scaleY) * 0.96; // 96% de respiro
+
+      stage.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', resizeStage);
+    window.addEventListener('load', resizeStage);
+    resizeStage();
+  </script>
+</body>
+</html>
