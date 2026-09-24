@@ -62,26 +62,34 @@
     }
 
     html, body {
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
       background-color: #121212;
       overflow: hidden;
       font-family: var(--font-body);
       color: var(--color-text-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
     }
 
-    /* Viewport Container com escala automática 16:9 */
+    /* Viewport Container com escala automática 16:9 - Perfeitamente Centralizado */
     #presentation-stage {
-      position: relative;
+      position: absolute;
+      top: 50%;
+      left: 50%;
       width: var(--slide-w);
       height: var(--slide-h);
+      min-width: var(--slide-w);
+      min-height: var(--slide-h);
+      max-width: var(--slide-w);
+      max-height: var(--slide-h);
       overflow: hidden;
+      transform: translate(-50%, -50%) scale(1);
       transform-origin: center center;
       box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
       background-color: var(--color-white);
+      box-sizing: border-box;
     }
 
     /* Slide Base - Estrutura Absoluta sem conflito de flex */
@@ -2538,22 +2546,32 @@
     }
     btnFullscreen.addEventListener('click', toggleFullscreen);
 
-    // Ajuste de Escala Responsivo 16:9
+    // Ajuste de Escala Responsivo 16:9 - Totalmente Visível, Proporcional e Centralizado
     function resizeStage() {
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
       const targetWidth = 1920;
       const targetHeight = 1080;
 
-      const scaleX = windowWidth / targetWidth;
-      const scaleY = windowHeight / targetHeight;
-      const scale = Math.min(scaleX, scaleY) * 0.96; // 96% de respiro
+      // Respiro para garantir visualização 100% livre de cortes e espaço para o HUD
+      const isFullscreen = !!document.fullscreenElement;
+      const marginX = isFullscreen ? 24 : 48; // margem horizontal de respiro
+      const marginY = isFullscreen ? 36 : 96; // respiro superior + espaço para o HUD flutuante
 
-      stage.style.transform = `scale(${scale})`;
+      const availableWidth = Math.max(windowWidth - marginX, 320);
+      const availableHeight = Math.max(windowHeight - marginY, 240);
+
+      const scaleX = availableWidth / targetWidth;
+      const scaleY = availableHeight / targetHeight;
+      const scale = Math.min(scaleX, scaleY);
+
+      stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
     }
 
     window.addEventListener('resize', resizeStage);
     window.addEventListener('load', resizeStage);
+    document.addEventListener('fullscreenchange', resizeStage);
+    document.addEventListener('DOMContentLoaded', resizeStage);
     resizeStage();
   </script>
 </body>
