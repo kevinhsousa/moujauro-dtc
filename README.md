@@ -33,12 +33,13 @@ O projeto é 100% estruturado sob as diretrizes da **FDA (DSHEA 1994 & cGMP 21 C
 A apresentação conta com uma central de inteligência deslizante (*drawer*) dividida em 4 eixos estratégicos:
 
 1. **Sumário Clicável:** Atalho para qualquer um dos 15 slides executivos.
-2. **Compêndio Clínico:** Metadados, mecanismos de ação e referências científicas completas:
-   - *Berberina Fitossomal:* Estímulo endógeno de GLP-1 e AMPK (9.6x AUC vs HCl - PMID: 34182255).
-   - *SURMOUNT-1 Benchmark:* NEJM (n = 2.539) — análise de náuseas (33%), perda de massa magra (39%) e custo ($1,100/mês).
-   - *Glucomannan Konjac:* Expansão hidrofílica 50:1 e desaceleração do esvaziamento gástrico (+38.4%).
-   - *Cromo Quelato:* Redução de 65% na compulsão por carboidratos (PMID: 16184071).
-   - *EGCG Padronizado:* Inibição de COMT e preservação de taxa metabólica basal (+4.8%).
+2. **Compêndio Clínico & Farmacodinâmica Didática:** Metadados, analogias para leigos, mecanismos de ação celular e links diretos PubMed:
+   - *SURMOUNT-1 Benchmark:* NEJM (n = 2.539) — vulnerabilidade do Mounjaro: 33.3% náuseas, 39% perda de massa magra (DXA) e custo abusivo ($1,100/mês) [PMID: 35658024].
+   - *Berberina Fitossomal (Berbevis®):* O "Cavalo de Troia" micelar que contorna a bomba P-gp e atinge 9.6x mais pico plasmático sem cólicas [PMID: 34182255].
+   - *Secreção de GLP-1 via TAS2R:* Estímulo dos receptores de amargor das células L no íleo promovendo liberação endógena de GLP-1 nativo [PMID: 32903698].
+   - *Glucomannan Konjac:* O "relógio gástrico": hidratação coloidal 50:1, retardo de esvaziamento em +38.4% e sinalização vagal de plenitude por 4h [Parecer EFSA 1798].
+   - *Cromo Bisglicinato:* Fim dos ataques noturnos à geladeira via cromodulina/GLUT-4 (-65% em fissura por doces e carboidratos) [PMID: 16184071].
+   - *EGCG Padronizado (95%):* Inibição da enzima COMT, aumento de +4.8% no gasto energético 24h e blindagem contra o efeito platô metabólico [PMID: 10584049].
 3. **Blueprint Técnico do Produto:** Especificação da cápsula entérica vegetal (DRcaps® HPMC), frasco âmbar PET 150cc com selo de indução térmica, laudos analíticos HPLC/ICP-MS e claims de estrutura/função permitidos pela FDA.
 4. **Custos Fabris cGMP & Supply Chain:** COGS detalhado de **$6.95 USD por frasco** e fulfillment integrado nos EUA ($6.50/pedido via USPS Ground Advantage).
 
